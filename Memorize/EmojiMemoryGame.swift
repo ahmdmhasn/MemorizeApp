@@ -9,6 +9,7 @@ import Foundation
 
 class EmojiMemoryGame: ObservableObject {
   
+  @Published
   private var model = EmojiMemoryGame.createMemoryGame()
   
   static func createMemoryGame() -> MemoryGame<String> {
@@ -27,7 +28,6 @@ class EmojiMemoryGame: ObservableObject {
   // MARK: - Intents
   
   func choose(card: MemoryGame<String>.Card) {
-    objectWillChange.send()
     model.choose(card: card)
   }
 }

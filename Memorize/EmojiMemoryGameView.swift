@@ -42,16 +42,18 @@ struct CardView: View {
           .stroke(lineWidth: Contants.lineWidth)
         Text(card.content)
       } else {
-        RoundedRectangle(cornerRadius: Contants.cornerRadius)
-          .fill()
+        if !card.isMatched {
+          RoundedRectangle(cornerRadius: Contants.cornerRadius)
+            .fill()
+        }
       }
     }
     .font(Contants.fontSize(for: size))
   }
   
   enum Contants {
-    static let cornerRadius = CGFloat(10)
-    static let lineWidth = CGFloat(3)
+    static let cornerRadius = CGFloat(12)
+    static let lineWidth = CGFloat(4)
     static func fontSize(for size: CGSize) -> Font? {
       return Font.system(size: size.height * 0.75)
     }

@@ -14,10 +14,10 @@ struct GridStack<Content: View>: View {
   
   var body: some View {
     ScrollView {
-      VStack {
-        ForEach(0 ..< rows, id: \.self) { row in
-          HStack {
-            ForEach(0 ..< self.columns, id: \.self) { column in
+      HStack {
+        ForEach(0 ..< self.columns, id: \.self) { column in
+          VStack {
+            ForEach(0 ..< rows, id: \.self) { row in
               let index = indexOf(row: row, column: column)
               self.content(index)
             }
@@ -34,6 +34,6 @@ struct GridStack<Content: View>: View {
   }
   
   private func indexOf(row: Int, column: Int) -> Int {
-    return row * column + column
+    return row * (rows + 1) + column
   }
 }

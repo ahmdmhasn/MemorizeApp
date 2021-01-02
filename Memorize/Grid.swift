@@ -31,9 +31,9 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View {
     }
   }
   
-    func body(for item: Item, in size: CGSize) -> some View {
-      let width = size.width / CGFloat(columns)
-      return viewForItem(item)
-        .frame(width: width, height: width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-    }
+  func body(for item: Item, in size: CGSize) -> some View {
+    let width = size.width / CGFloat(columns)
+    return viewForItem(item)
+      .frame(width: width, height: width, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+  }
 }
