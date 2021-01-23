@@ -12,7 +12,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
   private(set) var cards: [Card]
   
   var onlyFaceUpCardIndex: Int? {
-    get { cards.indices.filter { cards[$0].isFaceUp }.first }
+    get { cards.indices.filter { cards[$0].isFaceUp }.only }
     set { turnAllCardsFaceUp(except: newValue) }
   }
   
@@ -26,19 +26,15 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
     
     // If a card is visible
-    if let visibleIndex = onlyFaceUpCardIndex {
-      // Visiable is the same as the other
-      let visibleCard = cards[visibleIndex]
-      if visibleCard.content == cards[selectedIndex].content {
-        cards[selectedIndex].isMatched = true
-        cards[visibleIndex].isMatched = true
-        onlyFaceUpCardIndex = nil
-        return
-      } else {
-        onlyFaceUpCardIndex = index(of: card)
-      }
+    guard let potentialMatchIndex = onlyFaceUpCardIndex else {
+      onlyFaceUpCardIndex = selectedIndex
+      return
     }
     
+    if cards[potentialMatchIndex].content == cards[selectedIndex].content {
+      cards[selectedIndex].isMatched = true
+      cards[potentialMatchIndex].isMatched = true
+    }
     cards[selectedIndex].isFaceUp = true
   }
   
