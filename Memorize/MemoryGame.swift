@@ -30,9 +30,10 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
       // Visiable is the same as the other
       let visibleCard = cards[visibleIndex]
       if visibleCard.content == cards[selectedIndex].content {
-        let visibleIndex = self.index(of: visibleCard) ?? .zero
         cards[selectedIndex].isMatched = true
         cards[visibleIndex].isMatched = true
+        onlyFaceUpCardIndex = nil
+        return
       } else {
         onlyFaceUpCardIndex = index(of: card)
       }
